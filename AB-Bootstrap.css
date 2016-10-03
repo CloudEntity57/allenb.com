@@ -1,0 +1,40 @@
+
+#theNav{
+    margin-top: 5px;
+    text-align: center;
+}
+
+#coolCarousel{
+    margin-top:100px;
+    min-height:200px;
+    max-height:550px;
+    overflow: hidden;
+}
+#top-navbar{
+    margin-bottom: 0;
+    
+}
+
+
+.thePhoto{
+    min-height:350px;
+    
+}
+
+#ABPhoto{
+    background-color: white;
+    border: 1px solid gray;
+   
+}
+
+main{
+   margin-bottom: 25px; 
+}
+
+
+@media(min-width:992px){
+    #coolCarousel,.thePhoto{
+        min-height:600px;
+    }
+     
+}
