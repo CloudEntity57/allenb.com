@@ -6,15 +6,9 @@ $(window).resize(function(){
 
 
 //===============Top bar removal when scrolling==================
-$.fn.scrollEnd = function(callback, timeout) {          
-  $(this).scroll(function(){
-    var $this = $(this);
-    if ($this.data('scrollTimeout')) {
-      clearTimeout($this.data('scrollTimeout'));
-    }
-    $this.data('scrollTimeout', setTimeout(callback,timeout));
-  });
-};
+
+
+
 $topbar = $("#top-row");
 $topBarUp = function(){
         $topbar.slideUp(400);
@@ -27,97 +21,31 @@ $topBarDown = function(){
         $topbar.addClass("seen");
     };
 
-$toggler = function(){
-            if(!$overlay.hasClass("showing")){
-                    if($topbar.hasClass("seen")){
-                        if($(window).scrollTop() == 0){
-                            $topbar.show();
-                        }else{;
-                            $topBarUp();
-                              
-                        };
-                    }else{
-                        $topBarDown();
-                    };
-            };
-}
-
-
-$(window).click($toggler);
-$(window).scrollEnd(function(){
-    if($(window).scrollTop() == 0){
-                            $topbar.show();
-                        };
-});
-
-
-    
 
 
 
-/*
-$.fn.scrollEnd = function(callback, timeout) {          
-  $(this).scroll(function(){
-    var $this = $(this);
-    if ($this.data('scrollTimeout')) {
-      clearTimeout($this.data('scrollTimeout'));
+$(window).scroll(
+    function(){$pos = $(window).scrollTop();
+        if($pos !== 0){
+            $topBarDown();
+        }else if ($pos > ($height * 3)){
+            $topBarUp();
+        };
+        
     }
-    $this.data('scrollTimeout', setTimeout(callback,timeout));
-  });
-};
-
-
-
-// how to call it (with a 1000ms timeout):
-
-
-
-$topbar = $("#top-row");
-/// Scroll hide title bar
-$topremove = function(){
-    
-    if($(window).scrollTop() == 0){
-                    console.log("executing function");
-                    $topbar.show();
-    }else{
-        $topbar.slideUp(800);
-    };
-}
-$topreplace = function(){
-    $topbar.show();
-    
-}
-
-$rowpos = function(){
-    $(".nav-body3").scrollTop();
-};
-
-
-//$(window).on('scroll',$topreplace);
-
-
-var lastScrollTop = 0;
-
-
-
-$(window).scroll(function(event){
-   var st = $(this).scrollTop();
-    
- $topbar.show();
-    
-   if (st > lastScrollTop){
-       $(window).scrollEnd($topremove,50);
-   } else {
-      $(window).on('scroll',
-          $topreplace()
-      );
-       
-   };
-    
-   lastScrollTop = st;
-    
+);
+$height = $topbar.height();
+$(window).scroll(function() {
+    clearTimeout($.data(this, 'scrollTimer'));
+    $.data(this, 'scrollTimer', setTimeout(function() {
+            if($pos > ($height * 3)){
+            $topBarUp();
+            }else{
+                $topBarDown();
+            };
+    }, 200));
 });
-*/
+
 
 /// Carousel Code =========================================
 var inner_item = $(".carousel-inner .item"); 
