@@ -16,7 +16,7 @@ $topBarUp = function(){
         $topbar.addClass("unseen");
 };
 $topBarDown = function(){
-        $topbar.slideDown(600);
+        $topbar.slideDown(0);
         $topbar.removeClass("unseen");
         $topbar.addClass("seen");
     };
