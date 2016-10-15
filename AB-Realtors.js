@@ -22,29 +22,21 @@ $topBarDown = function(){
     };
 
 
-
+$newPos = 0;
 
 $(window).scroll(
-    function(){$pos = $(window).scrollTop();
-        if($pos !== 0){
-            $topBarDown();
-        }else if ($pos > ($height)){
+    function(){
+        $pos = $(window).scrollTop();
+        if ($pos > $newPos){
             $topBarUp();
+        }else{
+            $topBarDown();
         };
+        $newPos = $pos;
         
     }
 );
-$height = $topbar.height();
-$(window).scroll(function() {
-    clearTimeout($.data(this, 'scrollTimer'));
-    $.data(this, 'scrollTimer', setTimeout(function() {
-            if($pos > ($height)){
-            $topBarUp();
-            }else{
-                $topBarDown();
-            };
-    }, 200));
-});
+
 
 
 /// Carousel Code =========================================
