@@ -28,7 +28,7 @@ $(window).scroll(
     function(){$pos = $(window).scrollTop();
         if($pos !== 0){
             $topBarDown();
-        }else if ($pos > ($height * 3)){
+        }else if ($pos > ($height)){
             $topBarUp();
         };
         
@@ -38,7 +38,7 @@ $height = $topbar.height();
 $(window).scroll(function() {
     clearTimeout($.data(this, 'scrollTimer'));
     $.data(this, 'scrollTimer', setTimeout(function() {
-            if($pos > ($height * 3)){
+            if($pos > ($height)){
             $topBarUp();
             }else{
                 $topBarDown();
