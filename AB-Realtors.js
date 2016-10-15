@@ -1,7 +1,126 @@
-var inner_item = $(".carousel-inner .item"); 
+var $toprow = $('#top-row');
+
+$(window).resize(function(){
+    $toprow.css("position","static");
+});
+
+
+//===============Top bar removal when scrolling==================
+$.fn.scrollEnd = function(callback, timeout) {          
+  $(this).scroll(function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,timeout));
+  });
+};
+$topbar = $("#top-row");
+$topBarUp = function(){
+        $topbar.slideUp(400);
+        $topbar.removeClass("seen");
+        $topbar.addClass("unseen");
+};
+$topBarDown = function(){
+        $topbar.slideDown(400);
+        $topbar.removeClass("unseen");
+        $topbar.addClass("seen");
+    };
+
+$toggler = function(){
+            if(!$overlay.hasClass("showing")){
+                    if($topbar.hasClass("seen")){
+                        if($(window).scrollTop() == 0){
+                            $topbar.show();
+                        }else{;
+                            $topBarUp();
+                              
+                        };
+                    }else{
+                        $topBarDown();
+                    };
+            };
+}
+
+
+$(window).click($toggler);
+$(window).scrollEnd(function(){
+    if($(window).scrollTop() == 0){
+                            $topbar.show();
+                        };
+});
+
+
+    
+
+
+
+/*
+$.fn.scrollEnd = function(callback, timeout) {          
+  $(this).scroll(function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,timeout));
+  });
+};
+
+
+
+// how to call it (with a 1000ms timeout):
+
+
+
+$topbar = $("#top-row");
+/// Scroll hide title bar
+$topremove = function(){
+    
+    if($(window).scrollTop() == 0){
+                    console.log("executing function");
+                    $topbar.show();
+    }else{
+        $topbar.slideUp(800);
+    };
+}
+$topreplace = function(){
+    $topbar.show();
+    
+}
+
+$rowpos = function(){
+    $(".nav-body3").scrollTop();
+};
+
+
+//$(window).on('scroll',$topreplace);
+
+
+var lastScrollTop = 0;
+
+
+
+$(window).scroll(function(event){
+   var st = $(this).scrollTop();
+    
+ $topbar.show();
+    
+   if (st > lastScrollTop){
+       $(window).scrollEnd($topremove,50);
+   } else {
+      $(window).on('scroll',
+          $topreplace()
+      );
+       
+   };
+    
+   lastScrollTop = st;
+    
+});
+*/
 
 /// Carousel Code =========================================
-
+var inner_item = $(".carousel-inner .item"); 
 
 var photoList = [
     
@@ -10,7 +129,7 @@ var photoList = [
             "old_1910_courthouse.jpg",
             "Harris-County-Courthouse-inside-view-of-glass-stained-dome-looking-up.jpg",
             "bexar.jpg",
-            "AB%20office%20side.jpg"
+            "AB%20office%20side%20view2.jpg"
             
         ];
 
@@ -60,6 +179,8 @@ var links = $(".nav-bar div");
              $(this).find("ul").css("display","none");
         });
 
+
+
 ///--------IMAGE LIGHTBOX---------
 
         var $overlay = $('<div id="overlay">');
@@ -73,24 +194,71 @@ var links = $(".nav-bar div");
             $overlay.append($xbutton);
             $overlay.append($picimage);
             $overlay.show();
+            $overlay.addClass("showing");
         }
+        $('.row.properties a').click($photoShow);
+        $('.row.properties a').click($titleHide);
+
         $('.picture-box2 a').click($photoShow);
+        $('.picture-box2 a').click($titleHide);
+
+        //$('.litebox a').click($photoShow);
         $('.image-box a').click($photoShow);
+        $('.image-box a').click($titleHide);
 
         function $picRemove(){
             $('#picbox').remove();
+            $('#top-row').show();
         }
-       
-        $($overlay).click(function(){
-            $($overlay).css("display","none");
-            $picRemove();
-        });
-        $($xbutton).click(function(){
-            $($overlay).css("display","none");
-            $picRemove();
-        });
+
+        function $titleHide(){
+            $('#top-row').hide();
+        }
+        if($toprow.hasClass("seen")){
+                $($overlay).click(function(){
+                    $($overlay).css("display","none");
+                    $overlay.removeClass("showing");
+                    $picRemove();
+                    $toprow.removeClass("seen");
+                });
+                $($xbutton).click(function(){
+                    $($overlay).css("display","none");
+                    $overlay.removeClass("showing");
+                    $picRemove();
+                    $toprow.removeClass("seen");
+                });
+           }else{
+                $($overlay).click(function(){
+                    $($overlay).css("display","none");
+                    $overlay.removeClass("showing");
+                    $picRemove();
+                });
+                $($xbutton).click(function(){
+                    $($overlay).css("display","none");
+                    $overlay.removeClass("showing");
+                    $picRemove();
+                });
+};
                           
-        
+
+
+//=================COMMERCIAL PROPERTIES PANEL HOVER=========================
+
+/*
+var comprop = $('.row.properties');
+
+
+
+$(comprop).mouseenter(function(){
+    $(this).addClass("row properties panel panel-default");
+});
+$(comprop).mouseleave(function(){
+    $(this).removeClass("panel panel-default");
+});
+
+*/
+
+
 
 //--------TITLE ROW SCROLL------------------
 
