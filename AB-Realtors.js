@@ -11,12 +11,12 @@ $(window).resize(function(){
 
 $topbar = $("#top-row");
 $topBarUp = function(){
-        $topbar.slideUp(400);
+        $topbar.slideUp(600);
         $topbar.removeClass("seen");
         $topbar.addClass("unseen");
 };
 $topBarDown = function(){
-        $topbar.slideDown(400);
+        $topbar.slideDown(600);
         $topbar.removeClass("unseen");
         $topbar.addClass("seen");
     };
