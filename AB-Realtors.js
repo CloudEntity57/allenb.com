@@ -12,20 +12,15 @@ $(window).resize(function(){
 $topbar = $("#top-row");
 $topBarUp = function(){
         $topbar.slideUp(600);
-        $topbar.removeClass("seen");
-        $topbar.addClass("unseen");
 };
 $topBarDown = function(){
         $topbar.slideDown(0);
-        $topbar.removeClass("unseen");
-        $topbar.addClass("seen");
     };
 
 
 $newPos = 0;
 
-$(window).scroll(
-    function(){
+$(window).scroll(function(){
         $pos = $(window).scrollTop();
         if ($pos > $newPos){
             $topBarUp();
@@ -33,9 +28,7 @@ $(window).scroll(
             $topBarDown();
         };
         $newPos = $pos;
-        
-    }
-);
+    });
 
 
 
@@ -134,29 +127,26 @@ var links = $(".nav-bar div");
         function $titleHide(){
             $('#top-row').hide();
         }
+        function $hideOverlay(){
+            $($overlay).css("display","none");
+            $overlay.removeClass("showing");
+            $picRemove();
+        }
         if($toprow.hasClass("seen")){
                 $($overlay).click(function(){
-                    $($overlay).css("display","none");
-                    $overlay.removeClass("showing");
-                    $picRemove();
+                    $hideOverlay();
                     $toprow.removeClass("seen");
                 });
                 $($xbutton).click(function(){
-                    $($overlay).css("display","none");
-                    $overlay.removeClass("showing");
-                    $picRemove();
+                    $hideOverlay();
                     $toprow.removeClass("seen");
                 });
            }else{
                 $($overlay).click(function(){
-                    $($overlay).css("display","none");
-                    $overlay.removeClass("showing");
-                    $picRemove();
+                    $hideOverlay();
                 });
                 $($xbutton).click(function(){
-                    $($overlay).css("display","none");
-                    $overlay.removeClass("showing");
-                    $picRemove();
+                    $hideOverlay();
                 });
 };
                           
